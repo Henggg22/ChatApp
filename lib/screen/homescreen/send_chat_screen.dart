@@ -1,3 +1,4 @@
+import 'package:chat_app/screen/homescreen/profile_user.dart';
 import 'package:chat_app/utils/color.dart';
 import 'package:flutter/material.dart';
 
@@ -18,33 +19,42 @@ class _SendChatScreenState extends State<SendChatScreen> {
         leadingWidth: 45,
         foregroundColor: Colors.white,
         backgroundColor: ColorUse.card,
-        title: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.network(
-                  'https://images.unsplash.com/photo-1565160657870-c332a2259da4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpbmElMjBnaXJsfGVufDB8fDB8fHww',
-                  height: 40,
-                  width: 40,
-                  fit: BoxFit.cover),
-            ),
-            const SizedBox(width: 10),
-            const Column(
-              children: [
-                Text('Elizabeth',
-                    style: TextStyle(
-                        color: ColorUse.text,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600)),
-                SizedBox(height: 3),
-                Text('Active Now',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400)),
-              ],
-            ),
-          ],
+        title: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ProfileuserScreen()),
+            );
+          },
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.network(
+                    'https://images.unsplash.com/photo-1565160657870-c332a2259da4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpbmElMjBnaXJsfGVufDB8fDB8fHww',
+                    height: 40,
+                    width: 40,
+                    fit: BoxFit.cover),
+              ),
+              const SizedBox(width: 10),
+              const Column(
+                children: [
+                  Text('Elizabeth',
+                      style: TextStyle(
+                          color: ColorUse.text,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600)),
+                  SizedBox(height: 3),
+                  Text('Active Now',
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400)),
+                ],
+              ),
+            ],
+          ),
         ),
         actions: [
           IconButton(

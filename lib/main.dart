@@ -1,4 +1,5 @@
 import 'package:chat_app/screen/homescreen/home_screen.dart';
+import 'package:chat_app/screen/homescreen/profile_user.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Chat App',
-      home: HomeScreen(),
+      home: ProfileuserScreen(),
     );
   }
 }
