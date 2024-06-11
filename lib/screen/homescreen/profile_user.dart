@@ -18,8 +18,23 @@ class _ProfileuserScreenState extends State<ProfileuserScreen> {
         appBar: AppBar(
           foregroundColor: ColorUse.text,
           backgroundColor: Colors.transparent,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: InkWell(
+                  onTap: () {},
+                  child: const Text(
+                    'Edit',
+                    style: TextStyle(
+                      color: ColorUse.text,
+                      fontFamily: 'Poppins',
+                      fontSize: 12,
+                    ),
+                  )),
+            )
+          ],
         ),
-        //body
+        // body
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -187,7 +202,8 @@ class _ProfileuserScreenState extends State<ProfileuserScreen> {
                       children: List.generate(
                         15, // Number of items
                         (index) => Center(
-                          child: Image.network('https://storage.prompt-hunt.workers.dev/clgoqpxsx0005jt08k976wx7e_1'),
+                          child: Image.network(
+                              'https://storage.prompt-hunt.workers.dev/clgoqpxsx0005jt08k976wx7e_1'),
                         ),
                       ),
                     ),
@@ -196,6 +212,32 @@ class _ProfileuserScreenState extends State<ProfileuserScreen> {
               ),
             ],
           ),
-        ));
+        )
+        // body: CustomScrollView(
+        //   slivers: [
+        //     SliverAppBar(
+        //       pinned: true,
+        //       expandedHeight: 200.0,
+        //       flexibleSpace: FlexibleSpaceBar(
+        //         title: Text('My App'),
+        //         background: Image.network(
+        //           'https://via.placeholder.com/150',
+        //           fit: BoxFit.cover,
+        //         ),
+        //       ),
+        //     ),
+        //     SliverList(
+        //       delegate: SliverChildBuilderDelegate(
+        //         (BuildContext context, int index) {
+        //           return ListTile(
+        //             title: Text('Item $index'),
+        //           );
+        //         },
+        //         childCount: 50,
+        //       ),
+        //     ),
+        //   ],
+        // )
+        );
   }
 }

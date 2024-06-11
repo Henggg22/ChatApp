@@ -142,6 +142,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
                                 style: TextStyle(
                                     color: ColorUse.text,
                                     fontSize: 12,
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
@@ -159,6 +160,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
                                 style: TextStyle(
                                     color: ColorUse.text,
                                     fontSize: 12,
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w400),
                               ),
                             ),
@@ -191,7 +193,8 @@ class _SendChatScreenState extends State<SendChatScreen> {
                                   'huh ?',
                                   style: TextStyle(
                                       color: ColorUse.text,
-                                      fontSize: 12,
+                                      fontSize: 14,
+                                      fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400),
                                 ),
                                 SizedBox(width: 5),
@@ -200,6 +203,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
                                   style: TextStyle(
                                       color: Colors.white30,
                                       fontSize: 10,
+                                      fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400),
                                 ),
                                 SizedBox(width: 5),
@@ -223,6 +227,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
                                   style: TextStyle(
                                       color: ColorUse.text,
                                       fontSize: 12,
+                                      fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400),
                                 ),
                                 SizedBox(width: 5),
@@ -231,6 +236,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
                                   style: TextStyle(
                                       color: Colors.white30,
                                       fontSize: 10,
+                                      fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400),
                                 ),
                                 SizedBox(width: 5),
@@ -253,8 +259,9 @@ class _SendChatScreenState extends State<SendChatScreen> {
       //bottom tab
       floatingActionButton: Container(
         height: 55,
+        margin: EdgeInsets.only(top: 40),
         width: double.infinity,
-        color: Colors.red,
+        color: ColorUse.card,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -304,7 +311,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
