@@ -249,10 +249,12 @@ class _SendChatScreenState extends State<SendChatScreen> {
           ),
         ),
       ),
+
       //bottom tab
-      bottomNavigationBar: Container(
+      floatingActionButton: Container(
         height: 55,
-        color: ColorUse.card,
+        width: double.infinity,
+        color: Colors.red,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -273,7 +275,6 @@ class _SendChatScreenState extends State<SendChatScreen> {
                       color: ColorUse.background,
                       borderRadius: BorderRadius.circular(50)),
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  margin: const EdgeInsets.symmetric(vertical: 8),
                   child: const Expanded(
                     child: TextField(
                       keyboardType: TextInputType.multiline,
@@ -303,6 +304,7 @@ class _SendChatScreenState extends State<SendChatScreen> {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

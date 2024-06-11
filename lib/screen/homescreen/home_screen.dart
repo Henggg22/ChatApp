@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(100),
                   child: Image.network(
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZJAaLyU43Xw8VWkiCpbyVNmq8XEJy3lO4A&s',
-                    height: 50.0,
-                    width: 50.0,
+                    height: 55.0,
+                    width: 55.0,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -131,14 +131,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   borderRadius: BorderRadius.circular(100.0),
                                   child: Image.network(
                                     'https://qph.cf2.quoracdn.net/main-qimg-e51ff159f3d077f96e69dccfca3ba017-lq',
-                                    width: 55,
-                                    height: 55,
+                                    width: 65,
+                                    height: 65,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 Positioned(
-                                  bottom: 2,
-                                  right: 0,
+                                  bottom: 3,
+                                  right: 3,
                                   child: Container(
                                     width: 12,
                                     height: 12,
@@ -195,8 +195,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 borderRadius: BorderRadius.circular(100.0),
                                 child: Image.network(
                                   'https://qph.cf2.quoracdn.net/main-qimg-e51ff159f3d077f96e69dccfca3ba017-lq',
-                                  width: 55,
-                                  height: 55,
+                                  width: 65,
+                                  height: 65,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -281,101 +281,101 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             //seen
             for (int i = 0; i < 2; i++)
-            InkWell(
-              onTap: () {
-                // Perform the action when the widget is tapped
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SendChatScreen()),
-                );
-              },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(100.0),
-                              child: Image.network(
-                                'https://qph.cf2.quoracdn.net/main-qimg-e51ff159f3d077f96e69dccfca3ba017-lq',
-                                width: 55,
-                                height: 55,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 2,
-                              right: 0,
-                              child: Container(
-                                width: 12,
-                                height: 12,
-                                decoration: const BoxDecoration(
-                                  color: Colors.green,
-                                  shape: BoxShape.circle,
+              InkWell(
+                onTap: () {
+                  // Perform the action when the widget is tapped
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SendChatScreen()),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10, horizontal: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Image.network(
+                                  'https://qph.cf2.quoracdn.net/main-qimg-e51ff159f3d077f96e69dccfca3ba017-lq',
+                                  width: 65,
+                                  height: 65,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Elli Nith',
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: ColorUse.text,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(height: 7.0),
-                              Text(
-                                'You still love her right ? ',
-                                style: TextStyle(
-                                    fontSize: 12.0,
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white54,
-                                    fontWeight: FontWeight.w400),
+                              Positioned(
+                                bottom: 2,
+                                right: 0,
+                                child: Container(
+                                  width: 12,
+                                  height: 12,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.green,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            '11:30 PM',
-                            style: TextStyle(
-                                fontSize: 10.0,
-                                color: Colors.grey,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w400),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Elli Nith',
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: ColorUse.text,
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 7.0),
+                                Text(
+                                  'You still love her right ? ',
+                                  style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white54,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
                           ),
-                          SizedBox(height: 7.0),
-                          Icon(
-                            Icons.done_all_rounded,
-                            color: Colors.white60,
-                            size: 14,
-                          )
                         ],
                       ),
-                    ),
-                  ],
+                      const Padding(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              '11:30 PM',
+                              style: TextStyle(
+                                  fontSize: 10.0,
+                                  color: Colors.grey,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(height: 7.0),
+                            Icon(
+                              Icons.done_all_rounded,
+                              color: Colors.white60,
+                              size: 14,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ),
@@ -408,4 +408,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
