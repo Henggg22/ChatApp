@@ -1,4 +1,5 @@
 import 'package:chat_app/screen/bottom_tab/contact.dart';
+import 'package:chat_app/screen/bottom_tab/home.dart';
 import 'package:chat_app/screen/bottom_tab/setting.dart';
 import 'package:chat_app/screen/homescreen/home_screen.dart';
 import 'package:chat_app/screen/homescreen/profile_user.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Chat App',
-      home: SettingScreen(),
+      home: HomeScreen(),
     );
   }
 }
