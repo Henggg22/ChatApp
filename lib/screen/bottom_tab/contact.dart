@@ -1,4 +1,3 @@
-import 'package:chat_app/screen/homescreen/send_chat_screen.dart';
 import 'package:chat_app/utils/color.dart';
 import 'package:flutter/material.dart';
 
@@ -144,10 +143,10 @@ class _ContactScreenState extends State<ContactScreen> {
             for (int i = 0; i < 20; i++)
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SendChatScreen()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const SendChatScreen()));
                 },
                 child: Padding(
                   padding:

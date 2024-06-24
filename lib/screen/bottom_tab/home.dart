@@ -1,3 +1,4 @@
+import 'package:chat_app/controllers/chatJson.dart';
 import 'package:chat_app/screen/homescreen/send_chat_screen.dart';
 import 'package:chat_app/utils/color.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +111,34 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //label online people
+            Padding(
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Onlines',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                      )),
+                  GestureDetector(
+                    onTap: () {
+                      print('See all online');
+                    },
+                    child: const Text('See all',
+                        style: TextStyle(
+                          color: ColorUse.subtext,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w300,
+                        )),
+                  ),
+                ],
+              ),
+            ),
             //online status
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -119,49 +148,65 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (int i = 0; i < 6; i++)
-                      Container(
-                        margin: const EdgeInsets.only(right: 15),
-                        child: Column(
-                          children: [
-                            Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.0),
-                                  child: Image.network(
-                                    'https://qph.cf2.quoracdn.net/main-qimg-e51ff159f3d077f96e69dccfca3ba017-lq',
-                                    width: 65,
-                                    height: 65,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 3,
-                                  right: 3,
-                                  child: Container(
-                                    width: 12,
-                                    height: 12,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.green,
-                                      shape: BoxShape.circle,
+                    ...ChatList().onlineData.map((item) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SendChatScreen(
+                                      name: item["name"].toString(),
+                                      avatar: item["avatar"].toString(),
+                                      online: item["online"], message: '', time: '',
+                                    )),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          child: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    child: Image.network(
+                                      item["avatar"].toString(),
+                                      width: 65,
+                                      height: 65,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            const Text(
-                              'Nith',
-                              style: TextStyle(
-                                  color: ColorUse.text,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 12),
-                            )
-                          ],
+                                  Positioned(
+                                    bottom: 3,
+                                    right: 3,
+                                    child: Container(
+                                      width: 12,
+                                      height: 12,
+                                      decoration: BoxDecoration(
+                                        color: item["online"] == true
+                                            ? Colors.green
+                                            : null,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                item["name"].toString().split(" ")[0],
+                                style: const TextStyle(
+                                    color: ColorUse.text,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 12),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -169,15 +214,38 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 10,
             ),
-            for (int i = 0; i < 8; i++)
-              //get chat
-              InkWell(
+            const Padding(
+              padding:
+                  EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Messgae',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                      )),
+                ],
+              ),
+            ),
+
+            //messager lists
+            ...ChatList().smgData.map((e) {
+              return InkWell(
                 onTap: () {
                   // Perform the action when the widget is tapped
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SendChatScreen()),
+                        builder: (context) => SendChatScreen(
+                              name: e["name"].toString(),
+                              avatar: e["avatar"].toString(),
+                              message: e["message"].toString(),
+                              online: e["online"],
+                              time: e["time"].toString(),
+                            )),
                   );
                 },
                 child: Padding(
@@ -193,7 +261,7 @@ class _HomeState extends State<Home> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(100.0),
                                 child: Image.network(
-                                  'https://hips.hearstapps.com/hmg-prod/images/closeup-of-a-black-russian-tsvetnaya-bolonka-royalty-free-image-1681161235.jpg?crop=0.563xw:1.00xh;0.204xw,0&resize=1200:*',
+                                  e["avatar"].toString(),
                                   width: 65,
                                   height: 65,
                                   fit: BoxFit.cover,
@@ -205,35 +273,41 @@ class _HomeState extends State<Home> {
                                 child: Container(
                                   width: 12,
                                   height: 12,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.green,
+                                  decoration: BoxDecoration(
+                                    color: e["online"] == true ? Colors.green : null,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Elli Nith',
-                                  style: TextStyle(
+                                  e["name"].toString(),
+                                  style: const TextStyle(
                                       fontSize: 14.0,
                                       color: ColorUse.text,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500),
                                 ),
-                                SizedBox(height: 7.0),
-                                Text(
-                                  'You still love her right ? ',
-                                  style: TextStyle(
+                                const SizedBox(height: 7.0),
+                                SizedBox(
+                                  width: 200.0, // Set the desired width
+                                  child: Text(
+                                    e["message"].toString(),
+                                    style: const TextStyle(
                                       fontSize: 12.0,
                                       fontFamily: 'Poppins',
                                       color: Colors.white54,
-                                      fontWeight: FontWeight.w400),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ],
                             ),
@@ -245,136 +319,41 @@ class _HomeState extends State<Home> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Text(
-                              '11:30 PM',
-                              style: TextStyle(
+                            Text(
+                              e["time"].toString(),
+                              style: const TextStyle(
                                   fontSize: 10.0,
                                   color: Colors.grey,
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.w400),
                             ),
                             const SizedBox(height: 7.0),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 6.0, vertical: 2.0),
-                              decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: const Text(
-                                '1',
-                                style: TextStyle(
-                                  fontSize: 8.0,
-                                  color: ColorUse.text,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.bold,
+                            if (e["badge"] != 0)
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6.0, vertical: 2.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            //seen
-            for (int i = 0; i < 2; i++)
-              InkWell(
-                onTap: () {
-                  // Perform the action when the widget is tapped
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SendChatScreen()),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10, horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(100.0),
-                                child: Image.network(
-                                  'https://qph.cf2.quoracdn.net/main-qimg-e51ff159f3d077f96e69dccfca3ba017-lq',
-                                  width: 65,
-                                  height: 65,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 2,
-                                right: 0,
-                                child: Container(
-                                  width: 12,
-                                  height: 12,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.green,
-                                    shape: BoxShape.circle,
+                                child: Text(
+                                  e["badge"].toString(),
+                                  style: const TextStyle(
+                                    fontSize: 10.0,
+                                    color: ColorUse.text,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Elli Nith',
-                                  style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: ColorUse.text,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(height: 7.0),
-                                Text(
-                                  'You still love her right ? ',
-                                  style: TextStyle(
-                                      fontSize: 12.0,
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white54,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              '11:30 PM',
-                              style: TextStyle(
-                                  fontSize: 10.0,
-                                  color: Colors.grey,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(height: 7.0),
-                            Icon(
-                              Icons.done_all_rounded,
-                              color: Colors.white60,
-                              size: 14,
-                            )
+                              )
                           ],
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
+              );
+            }),
           ],
         ),
       ),

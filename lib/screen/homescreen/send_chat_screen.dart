@@ -3,7 +3,19 @@ import 'package:chat_app/utils/color.dart';
 import 'package:flutter/material.dart';
 
 class SendChatScreen extends StatefulWidget {
-  const SendChatScreen({super.key});
+  final String name;
+  final String avatar;
+  final String message;
+  final bool online;
+  final String time;
+  const SendChatScreen({
+    super.key,
+    required this.name,
+    required this.avatar,
+    required this.message,
+    required this.online,
+    required this.time,
+  });
 
   @override
   State<SendChatScreen> createState() => _SendChatScreenState();
@@ -31,26 +43,25 @@ class _SendChatScreenState extends State<SendChatScreen> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: Image.network(
-                    'https://images.unsplash.com/photo-1565160657870-c332a2259da4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpbmElMjBnaXJsfGVufDB8fDB8fHww',
-                    height: 40,
-                    width: 40,
-                    fit: BoxFit.cover),
+                child: Image.network(widget.avatar,
+                    height: 40, width: 40, fit: BoxFit.cover),
               ),
               const SizedBox(width: 10),
-              const Column(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Elizabeth',
-                      style: TextStyle(
+                  Text(widget.name,
+                      style: const TextStyle(
                           color: ColorUse.text,
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
-                  SizedBox(height: 3),
-                  Text('Active Now',
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400)),
+                  const SizedBox(height: 3),
+                  if (widget.online == true)
+                    const Text('Active Now',
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400)),
                 ],
               ),
             ],
@@ -85,16 +96,13 @@ class _SendChatScreenState extends State<SendChatScreen> {
                     ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: Image.network(
-                          'https://images.unsplash.com/photo-1565160657870-c332a2259da4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpbmElMjBnaXJsfGVufDB8fDB8fHww',
-                          height: 80,
-                          width: 80,
-                          fit: BoxFit.cover),
+                      child: Image.network(widget.avatar,
+                          height: 80, width: 80, fit: BoxFit.cover),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      'Ellizabeth',
-                      style: TextStyle(
+                    Text(
+                      widget.name,
+                      style: const TextStyle(
                           fontSize: 16,
                           color: ColorUse.text,
                           fontWeight: FontWeight.w700),
@@ -112,144 +120,64 @@ class _SendChatScreenState extends State<SendChatScreen> {
                   ],
                 ),
                 // chat from
-                Padding(
-                  padding: const EdgeInsets.only(right: 60),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.network(
-                            'https://images.unsplash.com/photo-1565160657870-c332a2259da4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpbmElMjBnaXJsfGVufDB8fDB8fHww',
-                            height: 30,
-                            width: 30,
-                            fit: BoxFit.cover),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15.0, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: ColorUse.card,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Text(
-                                'Hello b :(',
-                                style: TextStyle(
-                                    color: ColorUse.text,
-                                    fontSize: 12,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                            const SizedBox(height: 3),
-                            Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15.0, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: ColorUse.card,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Text(
-                                'Can we start it again ?',
-                                style: TextStyle(
-                                    color: ColorUse.text,
-                                    fontSize: 12,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                // chat to
-                Padding(
-                  padding: const EdgeInsets.only(left: 60, top: 30),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network(widget.avatar,
+                          height: 30, width: 30, fit: BoxFit.cover),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15.0, vertical: 10),
                             decoration: BoxDecoration(
-                                color: ColorUse.card,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Row(
-                              children: [
-                                Text(
-                                  'huh ?',
-                                  style: TextStyle(
-                                      color: ColorUse.text,
-                                      fontSize: 14,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  '7:48 PM',
-                                  style: TextStyle(
+                              color: ColorUse.card,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            
+                            child: Container(
+                              margin: EdgeInsets.only(right: 40),
+                              child: Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                alignment: WrapAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      widget.message,
+                                      style: const TextStyle(
+                                        color: ColorUse.text,
+                                        fontSize: 12,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.time,
+                                    style: const TextStyle(
                                       color: Colors.white30,
                                       fontSize: 10,
                                       fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(width: 5),
-                                Icon(Icons.done_all_outlined,
-                                    size: 12, color: Colors.white60)
-                              ],
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(height: 3),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0, vertical: 10),
-                            decoration: BoxDecoration(
-                                color: ColorUse.card,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Row(
-                              children: [
-                                Text(
-                                  'Start for what ?',
-                                  style: TextStyle(
-                                      color: ColorUse.text,
-                                      fontSize: 12,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  '7:48 PM',
-                                  style: TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 10,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                SizedBox(width: 5),
-                                Icon(Icons.done_all_outlined,
-                                    size: 12, color: Colors.white60)
-                              ],
-                            ),
-                          ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
