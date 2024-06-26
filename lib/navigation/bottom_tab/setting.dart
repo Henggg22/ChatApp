@@ -154,7 +154,11 @@ class _SettingScreenState extends State<SettingScreen> {
                     value: light,
                     onChanged: (value) {
                       setState(() {
-                        light = true;
+                        if(value == true){
+                          light = false;
+                        }else{
+                          light = true;
+                        }
                       });
                     },
                   ),

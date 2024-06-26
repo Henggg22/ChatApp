@@ -1,6 +1,6 @@
-import 'package:chat_app/screen/bottom_tab/contact.dart';
-import 'package:chat_app/screen/bottom_tab/home.dart';
-import 'package:chat_app/screen/bottom_tab/setting.dart';
+import 'package:chat_app/navigation/bottom_tab/contact.dart';
+import 'package:chat_app/navigation/bottom_tab/home.dart';
+import 'package:chat_app/navigation/bottom_tab/setting.dart';
 import 'package:chat_app/utils/color.dart';
 
 import 'package:flutter/material.dart';

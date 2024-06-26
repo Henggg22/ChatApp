@@ -1,3 +1,5 @@
+import 'package:chat_app/controllers/chatJson.dart';
+import 'package:chat_app/screen/homescreen/send_chat_screen.dart';
 import 'package:chat_app/utils/color.dart';
 import 'package:flutter/material.dart';
 
@@ -140,74 +142,87 @@ class _ContactScreenState extends State<ContactScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            for (int i = 0; i < 20; i++)
-              InkWell(
-                onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const SendChatScreen()));
-                },
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20.0, vertical: 9),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Image.network(
-                                'https://images.unsplash.com/photo-1565160657870-c332a2259da4?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpbmElMjBnaXJsfGVufDB8fDB8fHww',
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.cover),
+            ...ChatList().smgData.map((item) {
+              return item["contact"] == true
+                  ? InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SendChatScreen(
+                              name: item["name"].toString(),
+                              avatar: item["avatar"].toString(),
+                              message: item["message"].toString(),
+                              online: item["online"],
+                              time: item["time"].toString(),
+                            ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0, vertical: 9),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
                               children: [
-                                Text(
-                                  'Rin Manita',
-                                  style: TextStyle(
-                                    color: ColorUse.text,
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(
+                                      item["avatar"].toString(),
+                                      height: 50,
+                                      width: 50,
+                                      fit: BoxFit.cover),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item["name"].toString(),
+                                        style: TextStyle(
+                                          color: ColorUse.text,
+                                          fontSize: 14,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        item["online"] == true ? 'Active' : 'Last seen recently',
+                                        style: TextStyle(
+                                          color: item["online"] == true ? Colors.green : ColorUse.subtext,
+                                          fontSize: 10,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  'Last seen recently',
-                                  style: TextStyle(
-                                    color: ColorUse.subtext,
-                                    fontSize: 10,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
+                                )
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      const Text(
-                        '098 88 99 88',
-                        style: TextStyle(
-                          color: ColorUse.subtext,
-                          fontSize: 10,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w400,
+                            const Text(
+                              '098 88 99 88',
+                              style: TextStyle(
+                                color: ColorUse.subtext,
+                                fontSize: 10,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                      ),
+                    )
+                  : SizedBox.shrink();
+            }),
           ],
         ),
       ),

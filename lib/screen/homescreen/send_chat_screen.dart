@@ -22,6 +22,8 @@ class SendChatScreen extends StatefulWidget {
 }
 
 class _SendChatScreenState extends State<SendChatScreen> {
+    final _textController = TextEditingController();
+    String _messageText = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,10 @@ class _SendChatScreenState extends State<SendChatScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const ProfileuserScreen()),
+                  builder: (context) => ProfileuserScreen(
+                        name: widget.name,
+                        avatar: widget.avatar,
+                      )),
             );
           },
           child: Row(
@@ -57,11 +62,13 @@ class _SendChatScreenState extends State<SendChatScreen> {
                           fontWeight: FontWeight.w600)),
                   const SizedBox(height: 3),
                   if (widget.online == true)
-                    const Text('Active Now',
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400)),
+                    const Text(
+                      'Active Now',
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
                 ],
               ),
             ],
@@ -82,103 +89,157 @@ class _SendChatScreenState extends State<SendChatScreen> {
         ],
       ),
       //body
-      body: Expanded(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: [
-                // the profile show
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(widget.avatar,
-                          height: 80, width: 80, fit: BoxFit.cover),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.name,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: ColorUse.text,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    const Text(
-                      'Start your conversation here',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white54,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                  ],
-                ),
-                // chat from
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(widget.avatar,
-                          height: 30, width: 30, fit: BoxFit.cover),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15.0, vertical: 10),
-                            decoration: BoxDecoration(
-                              color: ColorUse.card,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            
-                            child: Container(
-                              margin: EdgeInsets.only(right: 40),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                alignment: WrapAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      widget.message,
+      body: GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  // the profile show
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(widget.avatar,
+                            height: 80, width: 80, fit: BoxFit.cover),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        widget.name,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: ColorUse.text,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      const Text(
+                        'Start your conversation here',
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white54,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                  // chat from
+                  Padding(
+                    padding: const EdgeInsets.only(right: 40.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(widget.avatar,
+                              height: 30, width: 30, fit: BoxFit.cover),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0, vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: ColorUse.card,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  alignment: WrapAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        widget.message,
+                                        style: const TextStyle(
+                                          color: ColorUse.text,
+                                          fontSize: 12,
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(
+                                      widget.time,
                                       style: const TextStyle(
-                                        color: ColorUse.text,
-                                        fontSize: 12,
+                                        color: Colors.white30,
+                                        fontSize: 10,
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                  ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 3),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  //char to 
+                  if(_messageText.length > 0)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 60, top: 30),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 10),
+                              decoration: BoxDecoration(
+                                  color: ColorUse.card,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                children: [
                                   Text(
-                                    widget.time,
-                                    style: const TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 10,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    _messageText.toString(),
+                                    style: TextStyle(
+                                        color: ColorUse.text,
+                                        fontSize: 14,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400),
                                   ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    '7:48 PM',
+                                    style: TextStyle(
+                                        color: Colors.white30,
+                                        fontSize: 10,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  SizedBox(width: 5),
+                                  Icon(Icons.done_all_outlined,
+                                      size: 12, color: Colors.white60)
                                 ],
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 3),
-                        ],
-                      ),
+                            const SizedBox(height: 3),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
-                )
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -186,8 +247,9 @@ class _SendChatScreenState extends State<SendChatScreen> {
 
       //bottom tab
       floatingActionButton: Container(
+        
         height: 55,
-        margin: EdgeInsets.only(top: 40),
+        margin: const EdgeInsets.only(top: 40),
         width: double.infinity,
         color: ColorUse.card,
         child: Row(
@@ -206,40 +268,53 @@ class _SendChatScreenState extends State<SendChatScreen> {
             ),
             Expanded(
               child: Container(
-                  decoration: BoxDecoration(
-                      color: ColorUse.background,
-                      borderRadius: BorderRadius.circular(50)),
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: const Expanded(
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      style: TextStyle(
-                          color: ColorUse.text,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
-                      textAlignVertical: TextAlignVertical.center,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        hintText: 'Wrtite you message',
-                        hintStyle: TextStyle(
-                          color: Colors.white38,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                        ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                        alignLabelWithHint: true,
-                      ),
+                decoration: BoxDecoration(
+                  color: ColorUse.background,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  controller: _textController,
+                  keyboardType: TextInputType.multiline,
+                  
+                  style: const TextStyle(
+                    color: ColorUse.text,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(borderSide: BorderSide.none),
+                    hintText: 'Write your message',
+                    hintStyle: TextStyle(
+                      color: Colors.white38,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
                     ),
-                  )),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                    alignLabelWithHint: true,
+                  ),
+                ),
+              ),
             ),
+            
             IconButton(
               icon: const Icon(Icons.send),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  _messageText = _textController.text;
+                  _textController.clear();
+                  print(_messageText);
+                });
+               
+              },
             ),
           ],
         ),
+        
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      
     );
   }
 }

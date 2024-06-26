@@ -157,7 +157,9 @@ class _HomeState extends State<Home> {
                                 builder: (context) => SendChatScreen(
                                       name: item["name"].toString(),
                                       avatar: item["avatar"].toString(),
-                                      online: item["online"], message: '', time: '',
+                                      online: item["online"],
+                                      message: '',
+                                      time: '',
                                     )),
                           );
                         },
@@ -239,13 +241,14 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => SendChatScreen(
-                              name: e["name"].toString(),
-                              avatar: e["avatar"].toString(),
-                              message: e["message"].toString(),
-                              online: e["online"],
-                              time: e["time"].toString(),
-                            )),
+                      builder: (context) => SendChatScreen(
+                        name: e["name"].toString(),
+                        avatar: e["avatar"].toString(),
+                        message: e["message"].toString(),
+                        online: e["online"],
+                        time: e["time"].toString(),
+                      ),
+                    ),
                   );
                 },
                 child: Padding(
@@ -274,80 +277,82 @@ class _HomeState extends State<Home> {
                                   width: 12,
                                   height: 12,
                                   decoration: BoxDecoration(
-                                    color: e["online"] == true ? Colors.green : null,
+                                    color: e["online"] == true
+                                        ? Colors.green
+                                        : null,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  e["name"].toString(),
-                                  style: const TextStyle(
-                                      fontSize: 14.0,
-                                      color: ColorUse.text,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500),
+                          const SizedBox(width: 10.0),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                e["name"].toString(),
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  color: ColorUse.text,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w500,
                                 ),
-                                const SizedBox(height: 7.0),
-                                SizedBox(
-                                  width: 200.0, // Set the desired width
-                                  child: Text(
-                                    e["message"].toString(),
-                                    style: const TextStyle(
-                                      fontSize: 12.0,
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white54,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 7.0),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width *
+                                    0.5, // adjust the width as needed
+                                child: Text(
+                                  e["message"].toString(),
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    fontFamily: 'Poppins',
+                                    color: e["badge"] >= 1
+                                        ? Colors.white
+                                        : Colors.white54,
+                                    fontWeight: FontWeight.w400,
                                   ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              e["time"].toString(),
-                              style: const TextStyle(
-                                  fontSize: 10.0,
-                                  color: Colors.grey,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            e["time"].toString(),
+                            style: const TextStyle(
+                              fontSize: 10.0,
+                              color: Colors.grey,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
                             ),
-                            const SizedBox(height: 7.0),
-                            if (e["badge"] != 0)
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6.0, vertical: 2.0),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          const SizedBox(height: 7.0),
+                          if (e["badge"] != 0)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 6.0, vertical: 2.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Text(
+                                e["badge"].toString(),
+                                style: const TextStyle(
+                                  fontSize: 10.0,
+                                  color: ColorUse.text,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                child: Text(
-                                  e["badge"].toString(),
-                                  style: const TextStyle(
-                                    fontSize: 10.0,
-                                    color: ColorUse.text,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )
-                          ],
-                        ),
+                              ),
+                            )
+                        ],
                       ),
                     ],
                   ),

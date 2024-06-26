@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ProfileuserScreen extends StatefulWidget {
-  const ProfileuserScreen({super.key});
+  final String name;
+  final String avatar;
+  const ProfileuserScreen({ super.key,
+     required this.name, 
+     required this.avatar,
+     });
 
   @override
   State<ProfileuserScreen> createState() => _ProfileuserScreenState();
@@ -47,15 +52,15 @@ class _ProfileuserScreenState extends State<ProfileuserScreen> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Image.network(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZJAaLyU43Xw8VWkiCpbyVNmq8XEJy3lO4A&s',
+                       widget.avatar,
                         height: 100,
                         width: 100,
                         fit: BoxFit.cover),
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Manith',
-                    style: TextStyle(
+                   Text(
+                    widget.name,
+                    style: const TextStyle(
                         fontSize: 16,
                         color: ColorUse.text,
                         fontFamily: 'Poppins',

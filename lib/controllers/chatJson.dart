@@ -6,7 +6,8 @@ class ChatList {
       "message": "Hey, how's it going?",
       "time": "10:30 AM",
       "online": true,
-      "badge": 3
+      "badge": 3,
+      "contact": true,
     },
     {
       "name": "Jane Anna",
@@ -14,15 +15,17 @@ class ChatList {
       "message": "I'm doing great, thanks for asking!",
       "time": "10:31 AM",
       "online": true,
-      "badge": 1
+      "badge": 1,
+      "contact": true,
     },
     {
       "name": "John Marry",
       "avatar": "https://static.independent.co.uk/2022/07/11/02/13468908e66e6381094b47e09d7cf32eY29udGVudHNlYXJjaGFwaSwxNjU3NDU1OTAx-2.66865628.jpg",
-      "message": "That's good to hear. Are we still on for lunch later? asdasdasdasdas dsad asd sadas dasd",
+      "message": "That's good to hear. Are we still on for lunch later? If you can I will go to pick up you . are you okay ?",
       "time": "10:32 AM",
       "online": true,
-      "badge": 2
+      "badge": 2,
+      "contact": true,
     },
     {
       "name": "Jane Smith",
@@ -30,7 +33,8 @@ class ChatList {
       "message": "Absolutely, I'll meet you at the usual spot at 12:30.",
       "time": "10:33 AM",
       "online": false,
-      "badge": 0
+      "badge": 0,
+      "contact": true,
     },
     {
       "name": "Arriya Jennifer",
@@ -38,7 +42,8 @@ class ChatList {
       "message": "Can u go out with me today ?",
       "time": "10:33 AM",
       "online": false,
-      "badge": 0
+      "badge": 0,
+      "contact": false,
     },
     {
       "name": "Annan Woi",
@@ -46,7 +51,8 @@ class ChatList {
       "message": "Can u go out with me today ?",
       "time": "10:33 AM",
       "online": false,
-      "badge": 0
+      "badge": 0,
+      "contact": false,
     }
   ];
 
