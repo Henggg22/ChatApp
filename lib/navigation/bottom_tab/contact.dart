@@ -11,6 +11,25 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
+  final TextEditingController _firstnameController = TextEditingController();
+  final TextEditingController _lastnameController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+
+  void _saveNewItem() {
+    // Get the values from the text fields
+    final firstname = _firstnameController.text;
+    final lastname = _lastnameController.text;
+    final phoneNumber = _phoneNumberController.text;
+
+    // Perform the logic to save the new item
+    print('Saving new item: $firstname, $lastname, $phoneNumber');
+
+    // Clear the text fields
+    _firstnameController.clear();
+    _lastnameController.clear();
+    _phoneNumberController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +99,118 @@ class _ContactScreenState extends State<ContactScreen> {
                       color: Colors.white,
                       size: 25,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: double.infinity,
+                            color: ColorUse.card,
+                            height: 400, // Set the desired height of the modal
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      'Add New Contact',
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: "Poppins",
+                                          color: ColorUse.text),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextField(
+                                  style: const TextStyle(
+                                    color: ColorUse.text,
+                                    fontFamily: "Poppins",
+                                    fontSize: 14,
+                                  ),
+                                  controller: _firstnameController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'First Name',
+                                      hintStyle: TextStyle(
+                                          color: ColorUse.subtext,
+                                          fontFamily: "Poppins",
+                                          fontSize: 14),
+                                      focusColor: Colors.white),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextField(
+                                  style: const TextStyle(
+                                    color: ColorUse.text,
+                                    fontFamily: "Poppins",
+                                    fontSize: 14,
+                                  ),
+                                  controller: _lastnameController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Last Name',
+                                      hintStyle: TextStyle(
+                                          color: ColorUse.subtext,
+                                          fontFamily: "Poppins",
+                                          fontSize: 14),
+                                      focusColor: Colors.white),
+                                ),
+                                const SizedBox(height: 16.0),
+                                TextField(
+                                  keyboardType: TextInputType.phone,
+                                  style: const TextStyle(
+                                    color: ColorUse.text,
+                                    fontFamily: "Poppins",
+                                    fontSize: 14,
+                                  ),
+                                  controller: _phoneNumberController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Phone Number',
+                                      hintStyle: TextStyle(
+                                          color: ColorUse.subtext,
+                                          fontFamily: "Poppins",
+                                          fontSize: 14),
+                                      focusColor: Colors.white),
+                                ),
+                                const SizedBox(height: 16.0),
+                                Container(
+                                  height: 50,
+                                  margin: const EdgeInsets.only(top: 30),
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      _saveNewItem();
+                                      Navigator.of(context)
+                                          .pop(); // Close the modal
+                                    },
+                                    child: const Text(
+                                      'Create Contact',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Poppins",
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
                 )
               ],
@@ -195,9 +325,13 @@ class _ContactScreenState extends State<ContactScreen> {
                                         height: 5,
                                       ),
                                       Text(
-                                        item["online"] == true ? 'Active' : 'Last seen recently',
+                                        item["online"] == true
+                                            ? 'Active'
+                                            : 'Last seen recently',
                                         style: TextStyle(
-                                          color: item["online"] == true ? Colors.green : ColorUse.subtext,
+                                          color: item["online"] == true
+                                              ? Colors.green
+                                              : ColorUse.subtext,
                                           fontSize: 10,
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w400,

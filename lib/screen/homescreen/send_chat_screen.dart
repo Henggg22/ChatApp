@@ -22,8 +22,9 @@ class SendChatScreen extends StatefulWidget {
 }
 
 class _SendChatScreenState extends State<SendChatScreen> {
-    final _textController = TextEditingController();
-    String _messageText = '';
+  final _textController = TextEditingController();
+  final List<String> _chatMessages = [];
+  var message = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,9 +91,9 @@ class _SendChatScreenState extends State<SendChatScreen> {
       ),
       //body
       body: GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
         child: Expanded(
           child: SingleChildScrollView(
             child: Padding(
@@ -189,52 +190,64 @@ class _SendChatScreenState extends State<SendChatScreen> {
                       ],
                     ),
                   ),
-                  //char to 
-                  if(_messageText.length > 0)
+
+                  //char to
                   Padding(
-                    padding: const EdgeInsets.only(left: 60, top: 30),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    padding: const EdgeInsets.only(left: 60, top: 20),
+                    child: Column(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 10),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15.0, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: ColorUse.card,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    _messageText.toString(),
-                                    style: TextStyle(
-                                        color: ColorUse.text,
-                                        fontSize: 14,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400),
+                        if (_chatMessages.isNotEmpty)
+                          for (int i = 0; i < _chatMessages.length; i++)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15.0, vertical: 10),
+                                        decoration: BoxDecoration(
+                                            color: ColorUse.card,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Wrap(
+                                          crossAxisAlignment: WrapCrossAlignment.end,
+                                          alignment: WrapAlignment.end,
+                                          children: [
+                                            Text(
+                                              _chatMessages[i],
+                                              style: const TextStyle(
+                                                  color: ColorUse.text,
+                                                  fontSize: 14,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Text(
+                                              '7:48 PM',
+                                              style: TextStyle(
+                                                  color: Colors.white30,
+                                                  fontSize: 10,
+                                                  fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            const Icon(Icons.done_all_outlined,
+                                                size: 12, color: Colors.white60)
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                    ],
                                   ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    '7:48 PM',
-                                    style: TextStyle(
-                                        color: Colors.white30,
-                                        fontSize: 10,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Icon(Icons.done_all_outlined,
-                                      size: 12, color: Colors.white60)
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 3),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -247,7 +260,6 @@ class _SendChatScreenState extends State<SendChatScreen> {
 
       //bottom tab
       floatingActionButton: Container(
-        
         height: 55,
         margin: const EdgeInsets.only(top: 40),
         width: double.infinity,
@@ -256,27 +268,32 @@ class _SendChatScreenState extends State<SendChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(
-              icon: const Icon(Icons.photo_library_outlined),
-              onPressed: () {},
-            ),
-            IconButton(
               icon: const Icon(
-                Icons.mic,
+                Icons.camera_alt_rounded,
                 size: 27,
               ),
               onPressed: () {},
             ),
+            IconButton(
+              icon: const Icon(Icons.photo_library_outlined),
+              onPressed: () {},
+            ),
             Expanded(
               child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   color: ColorUse.background,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                        message = value;
+                    });
+                  },
                   controller: _textController,
                   keyboardType: TextInputType.multiline,
-                  
                   style: const TextStyle(
                     color: ColorUse.text,
                     fontSize: 14,
@@ -291,30 +308,28 @@ class _SendChatScreenState extends State<SendChatScreen> {
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                     ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 5.0),
                     alignLabelWithHint: true,
                   ),
                 ),
               ),
             ),
-            
-            IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: () {
-                setState(() {
-                  _messageText = _textController.text;
-                  _textController.clear();
-                  print(_messageText);
-                });
-               
-              },
+            if (message != "")
+              IconButton(
+                icon: const Icon(Icons.send, ),
+                onPressed: () {
+                  if (_textController.text.isNotEmpty) {
+                    setState(() {
+                      _chatMessages.add(_textController.text);
+                      _textController.clear();
+                    });
+                  }
+                },
             ),
           ],
         ),
-        
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      
     );
   }
 }

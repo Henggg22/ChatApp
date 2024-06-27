@@ -62,7 +62,6 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 200,
               fit: BoxFit.cover,
             ),
-            const SizedBox(height: 16),
             const Text(
               'Chat App',
               style: TextStyle(
@@ -71,18 +70,39 @@ class _SplashScreenState extends State<SplashScreen> {
                   fontFamily: "Poppins",
                   color: ColorUse.text),
             ),
-            const SizedBox(height: 3),
-            const Text(
+          ],
+        ),
+      ),
+      floatingActionButton: Container(
+        height: 55,
+        margin: const EdgeInsets.only(top: 40),
+        width: double.infinity,
+        child: const Column(
+          children: [
+             Text(
               'Version 1.1.0',
+              textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300,
-                  fontFamily: "Poppins",
-                  color: ColorUse.subtext),
+                fontSize: 12,
+                fontWeight: FontWeight.w300,
+                fontFamily: "Poppins",
+                color: ColorUse.subtext,
+              ),
+            ),
+             Text(
+              'Develop by Heng Co,Ltd',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w300,
+                fontFamily: "Poppins",
+                color: ColorUse.subtext,
+              ),
             ),
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
